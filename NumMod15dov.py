@@ -229,7 +229,7 @@ class NumMod(loader.Module):
 				filter_and_users['users'].append(user_id)
 				await utils.answer(message, f"✅ Ид <code>{user_id}</code> добавлен.")
 			else:
-				return await utils.answer(message, '❌ Превышен лимит в 5 юзеров.')
+				return await utils.answer(message, '❌ Превышен лимит в 15 юзеров.')
 			return self.db.set("NumMod", "numfilter", filter_and_users)
 		elif args[0] == '-sF':
 			try:
