@@ -1589,12 +1589,12 @@ class BioMod(loader.Module):
                             list = []
                             for i in link.split('='):
                                 list.append(i)
-                            await message.reply(f'.ид <code>@{list[1]}</code>'
+                            await message.reply(f'.ид @{list[1]}'
                             )
                             break
                         elif link.startswith('https://t.me'):
                             a ='@' + str(link.split('/')[3])
-                            await message.reply(f'.ид <code>{a}</code>'
+                            await message.reply(f'.ид {a}'
                             )
                             break
                         else:
@@ -1615,7 +1615,7 @@ class BioMod(loader.Module):
             await message.respond(
                 self.strings("tids")
             )
-            await asyncio.sleep(3.3)
+            await asyncio.sleep(3.5)
 
 
     async def иcmd(self, message):
