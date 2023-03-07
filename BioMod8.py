@@ -1647,7 +1647,7 @@ class BioMod(loader.Module):
                 hueta = validate_text(reply.raw_text)
                 
                 blayt = hueta[json["entities"][i]["offset"]:json["entities"][i]["offset"] + json["entities"][i]["length"]]
-                await message.reply(f".ид <code>{blayt}</code>")
+                await message.reply(f".ид {blayt}")
             await message.delete()
             await asyncio.sleep(3.3)
     
