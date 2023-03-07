@@ -1311,8 +1311,8 @@ class BioMod(loader.Module):
                         sms += f"{i}\n"
                     if "☣️ Био-опыт:" in i:
                         sms += f"{i}\n"
-#                    if "🧬 Био-ресурс:" in i:
-#                        sms += f"{i}\n"
+                    if "🧬 Био-ресурс:" in i:
+                        sms += f"{i}\n"
                     if "❗️ Руководитель в состоянии горячки, вызванной болезнью" in i:
                         s = i.replace("❗️ Руководитель в состоянии горячки, вызванной болезнью ", "")
                         sms += f"🤒 Горячка от {s}\n"
@@ -1648,9 +1648,9 @@ class BioMod(loader.Module):
                 hueta = validate_text(reply.raw_text)
                 
                 blayt = hueta[json["entities"][i]["offset"]:json["entities"][i]["offset"] + json["entities"][i]["length"]]
-                await message.reply(f".ид <code>{blayt}</code>")
+                await message.reply(f".ид {blayt}")
             await message.delete()
-            await asyncio.sleep(3.3)
+            await asyncio.sleep(3.5)
     
     async def бcmd(self, message):
         """
