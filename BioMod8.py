@@ -388,7 +388,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить {users}')
+                            await message.reply(f'заразить <code>{users}</code>')
                     elif link.startswith('https://t.me'):
                         a = '@' + str(link.split("/")[3])
                         if a in exlist:
@@ -398,7 +398,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить {a}')
+                            await message.reply(f'заразить <code>{a}</code>')
                     else:
                         await message.reply(
                             self.strings("hueta")
@@ -412,7 +412,7 @@ class BioMod(loader.Module):
                                 )
                             )
                     else:
-                        await message.reply(f"заразить {blayt}")
+                        await message.reply(f"заразить <code>{blayt}</code>")
                 await asyncio.sleep(3.3)
         
         except TypeError:
@@ -1318,7 +1318,10 @@ class BioMod(loader.Module):
                     if "❗️ Руководитель в состоянии горячки ещё" in i:
                         s = i.replace("❗️ Руководитель в состоянии горячки ещё ", "")
                         sms += f"🤒 Горячка на {s}\n"                        
-                await message.reply(sms) # ответ
+#                await message.respond(sms) # ответ
+                palilabu = await message.respond(sms) # ответ
+                await asyncio.sleep(6)
+                await palilabu.delete() # заметает следы
 
 #######################################################
         if self.config["Доступ к зарлисту"] == True:
@@ -1387,11 +1390,15 @@ class BioMod(loader.Module):
                             zhertva, user[0], user[1]
                         )
                     )              
+                    await asyncio.sleep(10)
+                    await message.delete()
                         
                 elif zhertva not in infList:
                         await message.reply(
                             self.strings("nf")
                         )  
+                        await asyncio.sleep(10)
+                        await message.delete()
                 else:
                     return
             
@@ -1589,12 +1596,12 @@ class BioMod(loader.Module):
                             list = []
                             for i in link.split('='):
                                 list.append(i)
-                            await message.reply(f'.ид <code>@{list[1]}</code>'
+                            await message.reply(f'.ид @{list[1]}'
                             )
                             break
                         elif link.startswith('https://t.me'):
                             a ='@' + str(link.split('/')[3])
-                            await message.reply(f'.ид <code>{a}</code>'
+                            await message.reply(f'.ид {a}'
                             )
                             break
                         else:
@@ -1615,7 +1622,7 @@ class BioMod(loader.Module):
             await message.respond(
                 self.strings("tids")
             )
-            await asyncio.sleep(3.3)
+            await asyncio.sleep(3.5)
 
 
     async def иcmd(self, message):
