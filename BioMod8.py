@@ -1322,6 +1322,7 @@ class BioMod(loader.Module):
                 palilabu = await message.respond(sms) # ответ
                 await asyncio.sleep(6)
                 await palilabu.delete() # заметает следы
+                await message.delete() # заметает следы
 
 #######################################################
         if self.config["Доступ к зарлисту"] == True:
