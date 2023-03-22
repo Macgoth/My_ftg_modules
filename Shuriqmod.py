@@ -13,7 +13,7 @@ class ModuleMod(loader.Module):
       try:
         b = [x for x in i.split('@')]
         await message.respond("Шурик з @" + b[1])
-        await asyncio.sleep(60)
+        await asyncio.sleep(2)
       except:
         pass
         await message.delete()
