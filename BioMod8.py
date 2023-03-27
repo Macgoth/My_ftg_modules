@@ -1719,7 +1719,8 @@ class BioMod(loader.Module):
         msg = f"{emoji}<b>Loading... {utils.ascii_face()}<b>"
         if random.randint(1, 100) > 95:
             msg = random.choices(hiunya, k=1)[0]
-        await utils.answer(message, msg)
+        gamarjoba = await utils.answer(message, msg)
+#        await utils.answer(message, msg)
         b.pop(0)
         hh = []
         for i in b:
@@ -1730,9 +1731,12 @@ class BioMod(loader.Module):
         
         count = 1
         for i in range(0, len(reply.entities) ):
-            exp = ""
+#            exp = ""
             try:
-                exp = hh[i]
+                exp = hh[i].replace(",",".")
+#                exp = hh[i]
+                exp_count = exp[1:-7].replace(" ", "")
+                exp = f"{round(float(exp_count)/ 10,1)}{exp[-7:]}"
             except:
                 exp = i
             link = json["entities"][i]["url"]
@@ -1761,16 +1765,21 @@ class BioMod(loader.Module):
             else:
                 sms += f'{str(count)}. что за хуета?\n'
             count += 1
+        sms = await message.reply(sms)
+        await gamarjoba.delete()
+#        await msg.delete()
+        await asyncio.sleep(250)
+        await sms.delete()
         
-        await self.inline.form(
-            sms,
-            reply_markup={
-                            "text": f"🔻 Close",
-                            "callback": self.inline__close,
-            },
-            message=message,
-            disable_security=False
-        )
+#        await self.inline.form(
+#            sms,
+#            reply_markup={
+#                            "text": f"🔻 Close",
+#                            "callback": self.inline__close,
+#            },
+#            message=message,
+#            disable_security=False
+#        )
         
 
 ### помощь
