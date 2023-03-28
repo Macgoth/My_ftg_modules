@@ -1449,6 +1449,7 @@ class BioMod(loader.Module):
                 if text != f"{nik} био" and text != f"{nik}био":
                     return
                 reply = await message.get_reply_message()
+                cautionbt = await message.respond("☢️<b>Показывает сразу сколько даёт жертва, а не опыт</b>☢")
                 args = utils.get_args_raw(message)
                 if not reply:
                     return
@@ -1478,7 +1479,10 @@ class BioMod(loader.Module):
                 count = 1
                 for i in range(0, len(reply.entities) ):
                     try:
-                        exp = hh[i]
+#                        exp = hh[i]
+                        exp = hh[i].replace(",",".").replace("опыт", "даст")
+                        exp_count = exp[1:-7].replace(" ", "")
+                        exp = f"{round(float(exp_count)/ 10,1)}{exp[-7:]}"
                     except:
                         exp = i
                     link = json["entities"][i]["url"]
@@ -1523,9 +1527,10 @@ class BioMod(loader.Module):
                             b_id = "@" + bla[1]
                             if b_id in infList:
                                 user = infList[b_id]
-                                zh = f"(+{user[0]}) "
+                                zh = f"<b>(+{user[0]})</b> "
                             sms += f'{str(count)}. {blya} {zh}| {exp} | <code>@{bla[1]}</code>  \n'
                     count += 1
+#                            sms +="☢️<b>Показывает сразу сколько даёт жертва, а не опыт</b>"
         
                 try:
                     await self.inline.form(
@@ -1733,7 +1738,7 @@ class BioMod(loader.Module):
         for i in range(0, len(reply.entities) ):
 #            exp = ""
             try:
-                exp = hh[i].replace(",",".")
+                exp = hh[i].replace(",",".").replace("опыт", "даст")
 #                exp = hh[i]
                 exp_count = exp[1:-6].replace(" ", "").replace("k", "")
                 exp = f"{round(float(exp_count)/ 10,1)}{exp[-7:]}"
