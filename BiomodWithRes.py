@@ -1,4 +1,3 @@
-
 __version__ = (3, 1, 0)
 
 #           ███████╗███████╗████████╗██╗░█████╗░░██████╗░█████╗░███████╗
@@ -55,10 +54,10 @@ class BioMod(loader.Module):
         "hueta": "🤔 Что за хуета?",
         
         "r.save":   
-            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена.\n"
+            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена, дон.\n"
             "<b>☣️ +{}{}</b> био-опыта.",
         "auto.save":   
-            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена.\n"
+            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена, дон.\n"
             "<b>☣️ {}+{}</b> био-опыта.",        
         "search":
             "<emoji document_id=5212932275376759608>✅</emoji> Жертва <code>{}</code> приносит:\n"
@@ -389,7 +388,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить {users}')
+                            await message.reply(f'заразить <code>{users}</code>')
                     elif link.startswith('https://t.me'):
                         a = '@' + str(link.split("/")[3])
                         if a in exlist:
@@ -399,7 +398,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить {a}')
+                            await message.reply(f'заразить <code>{a}</code>')
                     else:
                         await message.reply(
                             self.strings("hueta")
@@ -413,7 +412,7 @@ class BioMod(loader.Module):
                                 )
                             )
                     else:
-                        await message.reply(f"заразить {blayt}")
+                        await message.reply(f"заразить <code>{blayt}</code>")
                 await asyncio.sleep(3.3)
         
         except TypeError:
@@ -1319,7 +1318,11 @@ class BioMod(loader.Module):
                     if "❗️ Руководитель в состоянии горячки ещё" in i:
                         s = i.replace("❗️ Руководитель в состоянии горячки ещё ", "")
                         sms += f"🤒 Горячка на {s}\n"                        
-                await message.reply(sms) # ответ
+#                await message.respond(sms) # ответ
+                palilabu = await message.respond(sms) # ответ
+                await asyncio.sleep(6)
+                await palilabu.delete() # заметает следы
+                await message.delete() # заметает следы
 
 #######################################################
         if self.config["Доступ к зарлисту"] == True:
@@ -1388,11 +1391,15 @@ class BioMod(loader.Module):
                             zhertva, user[0], user[1]
                         )
                     )              
+                    await asyncio.sleep(10)
+                    await message.delete()
                         
                 elif zhertva not in infList:
                         await message.reply(
                             self.strings("nf")
                         )  
+                        await asyncio.sleep(10)
+                        await message.delete()
                 else:
                     return
             
@@ -1442,6 +1449,7 @@ class BioMod(loader.Module):
                 if text != f"{nik} био" and text != f"{nik}био":
                     return
                 reply = await message.get_reply_message()
+                cautionbt = await message.respond("☢️<b>Показывает сразу сколько даёт жертва, а не опыт</b>☢")
                 args = utils.get_args_raw(message)
                 if not reply:
                     return
@@ -1471,7 +1479,10 @@ class BioMod(loader.Module):
                 count = 1
                 for i in range(0, len(reply.entities) ):
                     try:
-                        exp = hh[i]
+#                        exp = hh[i]
+                        exp = hh[i].replace(",",".").replace("опыт", "даст")
+                        exp_count = exp[1:-7].replace(" ", "")
+                        exp = f"{round(float(exp_count)/ 10,1)}{exp[-7:]}"
                     except:
                         exp = i
                     link = json["entities"][i]["url"]
@@ -1516,9 +1527,10 @@ class BioMod(loader.Module):
                             b_id = "@" + bla[1]
                             if b_id in infList:
                                 user = infList[b_id]
-                                zh = f"(+{user[0]}) "
+                                zh = f"<b>(+{user[0]})</b> "
                             sms += f'{str(count)}. {blya} {zh}| {exp} | <code>@{bla[1]}</code>  \n'
                     count += 1
+#                            sms +="☢️<b>Показывает сразу сколько даёт жертва, а не опыт</b>"
         
                 try:
                     await self.inline.form(
@@ -1590,12 +1602,12 @@ class BioMod(loader.Module):
                             list = []
                             for i in link.split('='):
                                 list.append(i)
-                            await message.reply(f'.ид <code>@{list[1]}</code>'
+                            await message.reply(f'.ид @{list[1]}'
                             )
                             break
                         elif link.startswith('https://t.me'):
                             a ='@' + str(link.split('/')[3])
-                            await message.reply(f'.ид <code>{a}</code>'
+                            await message.reply(f'.ид {a}'
                             )
                             break
                         else:
@@ -1616,7 +1628,7 @@ class BioMod(loader.Module):
             await message.respond(
                 self.strings("tids")
             )
-            await asyncio.sleep(3.3)
+            await asyncio.sleep(3.5)
 
 
     async def иcmd(self, message):
@@ -1650,7 +1662,7 @@ class BioMod(loader.Module):
                 blayt = hueta[json["entities"][i]["offset"]:json["entities"][i]["offset"] + json["entities"][i]["length"]]
                 await message.reply(f".ид {blayt}")
             await message.delete()
-            await asyncio.sleep(3.5)
+            await asyncio.sleep(3.3)
     
     async def бcmd(self, message):
         """
@@ -1712,7 +1724,8 @@ class BioMod(loader.Module):
         msg = f"{emoji}<b>Loading... {utils.ascii_face()}<b>"
         if random.randint(1, 100) > 95:
             msg = random.choices(hiunya, k=1)[0]
-        await utils.answer(message, msg)
+        gamarjoba = await utils.answer(message, msg)
+#        await utils.answer(message, msg)
         b.pop(0)
         hh = []
         for i in b:
@@ -1723,9 +1736,12 @@ class BioMod(loader.Module):
         
         count = 1
         for i in range(0, len(reply.entities) ):
-            exp = ""
+#            exp = ""
             try:
-                exp = hh[i]
+                exp = hh[i].replace(",",".").replace("опыт", "даст")
+#                exp = hh[i]
+                exp_count = exp[1:-6].replace(" ", "").replace("k", "")
+                exp = f"{round(float(exp_count)/ 10,1)}{exp[-7:]}"
             except:
                 exp = i
             link = json["entities"][i]["url"]
@@ -1754,16 +1770,21 @@ class BioMod(loader.Module):
             else:
                 sms += f'{str(count)}. что за хуета?\n'
             count += 1
+        sms = await message.reply(sms)
+        await gamarjoba.delete()
+#        await msg.delete()
+        await asyncio.sleep(250)
+        await sms.delete()
         
-        await self.inline.form(
-            sms,
-            reply_markup={
-                            "text": f"🔻 Close",
-                            "callback": self.inline__close,
-            },
-            message=message,
-            disable_security=False
-        )
+#        await self.inline.form(
+#            sms,
+#            reply_markup={
+#                            "text": f"🔻 Close",
+#                            "callback": self.inline__close,
+#            },
+#            message=message,
+#            disable_security=False
+#        )
         
 
 ### помощь
