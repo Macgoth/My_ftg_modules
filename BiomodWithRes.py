@@ -1320,7 +1320,7 @@ class BioMod(loader.Module):
                         sms += f"🤒 Горячка на {s}\n"                        
 #                await message.respond(sms) # ответ
                 palilabu = await message.respond(sms) # ответ
-                await asyncio.sleep(6)
+                await asyncio.sleep(20)
                 await palilabu.delete() # заметает следы
                 await message.delete() # заметает следы
 
