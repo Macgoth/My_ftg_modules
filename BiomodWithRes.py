@@ -54,10 +54,10 @@ class BioMod(loader.Module):
         "hueta": "🤔 Что за хуета?",
         
         "r.save":   
-            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена, дон.\n"
+            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена.\n"
             "<b>☣️ +{}{}</b> био-опыта.",
         "auto.save":   
-            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена, дон.\n"
+            "<emoji document_id=5212932275376759608>🦠</emoji> Жертва <b><code>{}</code></b> сохранена.\n"
             "<b>☣️ {}+{}</b> био-опыта.",        
         "search":
             "<emoji document_id=5212932275376759608>✅</emoji> Жертва <code>{}</code> приносит:\n"
@@ -347,7 +347,7 @@ class BioMod(loader.Module):
                                 self.strings("hueta")
                             )
                         break
-            await asyncio.sleep(9)   
+            await asyncio.sleep(3)   
         if not count_st:
             await message.reply(
                 self.strings("no_sargs")
