@@ -388,7 +388,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить <code>{users}</code>')
+                            await message.reply(f'заразить {users}')
                     elif link.startswith('https://t.me'):
                         a = '@' + str(link.split("/")[3])
                         if a in exlist:
@@ -398,7 +398,7 @@ class BioMod(loader.Module):
                                     )
                                 )
                         else:
-                            await message.reply(f'заразить <code>{a}</code>')
+                            await message.reply(f'заразить {a}')
                     else:
                         await message.reply(
                             self.strings("hueta")
@@ -412,7 +412,7 @@ class BioMod(loader.Module):
                                 )
                             )
                     else:
-                        await message.reply(f"заразить <code>{blayt}</code>")
+                        await message.reply(f"заразить {blayt}")
                 await asyncio.sleep(3.3)
         
         except TypeError:
