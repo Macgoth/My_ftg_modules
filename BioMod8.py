@@ -327,7 +327,7 @@ class BioMod(loader.Module):
                                 )
                             else:
                                 await message.client.send_message(message.peer_id, 
-                                    f'заразить <code>{users}</code>\n<code>/купить вакцину</code>',
+                                    f'заразить <code>{users}</code>',
                                     reply_to=reply)
                         elif link.startswith('https://t.me'):
                             a = '@' + str(link.split('/')[3])
@@ -340,14 +340,14 @@ class BioMod(loader.Module):
                                 )
                             else:
                                 await message.client.send_message(message.peer_id, 
-                                    f'заразить <code>{a}</code>\n<code>/купить вакцину</code>',
+                                    f'заразить <code>{a}</code>',
                                     reply_to=reply)
                         else:
                             await message.reply(
                                 self.strings("hueta")
                             )
                         break
-            await asyncio.sleep(9)   
+            await asyncio.sleep(4)   
         if not count_st:
             await message.reply(
                 self.strings("no_sargs")
