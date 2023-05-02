@@ -1531,19 +1531,23 @@ class BioMod(loader.Module):
                             sms += f'{str(count)}. {blya} {zh}| {exp} | <code>@{bla[1]}</code>  \n'
                     count += 1
 #                            sms +="☢️<b>Показывает сразу сколько даёт жертва, а не опыт</b>"
+            muthafaka = await message.respond(sms)
+            await asyncio.sleep(300)
+            await muthafaka.delete()
+            await cautionbt.delete()
         
-                try:
-                    await self.inline.form(
-                        sms,
-                        reply_markup={
-                                        "text": f"🔻 Close",
-                                        "callback": self.inline__close,
-                        },
-                        message=message,
-                        disable_security=False
-                    )
-                except:
-                    await message.reply(sms) 
+#                try:
+#                    await self.inline.form(
+#                        sms,
+#                        reply_markup={
+#                                        "text": f"🔻 Close",
+#                                        "callback": self.inline__close,
+#                        },
+#                        message=message,
+#                        disable_security=False
+#                    )
+#                except:
+#                    await message.reply(sms) 
             
 #######################################################
 
